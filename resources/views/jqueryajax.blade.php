@@ -51,19 +51,19 @@
         <div class="col-md-4 mb-4 p-4 ms-auto">
             <label for="">end layout</label>
 
-            <input type="text" id="jumlah" class="form-control">
+            <input type="text" id="jumlah" class="form-control" disabled>
         </div>
 
         <div class="col-md-4 mb-4 p-4 me-auto">
             <label for="">start layout</label>
-            <input type="text" id="total" class="form-control">
+            <input type="text" id="total" class="form-control" disabled>
         </div>
 
     </div>
     <div class="col-md-2 mb-4 p-4 me-auto">
     <button id="tampilkan" class="form-control btn btn-secondary">tampilkan</button>
 </div>
-    <div id="hasil" class="form-control"></div>
+
     <!-- Modal -->
     <div class="modal fade" id="userShowModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -86,7 +86,7 @@
 
 
     <!-- Modal -->
-    <div class="modal fade" id="userShowModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="cekmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -94,9 +94,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p><strong>ID:</strong> <span id="user-id"></span></p>
-                    <p><strong>Name:</strong> <span id="user-name"></span></p>
-                    <p><strong>Email:</strong> <span id="user-email"></span></p>
+                    <div id="hasil" class="form-control"></div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -169,6 +167,7 @@
 
                         // Menampilkan data setelah waktu tunda
                         $('#hasil').html(data);
+                        $('#cekmodal').modal('show');
                         alert('sukses di tampilkan');
                         console.table(response);
                     }, 2000); // Waktu tunda selama 2 detik (2000 milidetik)
@@ -186,14 +185,29 @@
             var hasil = $('#jumlah');
             var total = $('#total');
 
-            var kali = counter * 2;
-            var formattedResult = new Intl.NumberFormat('en-US', {
-                style: 'decimal',
-                minimumFractionDigits: 2
-            }).format(kali);
+            // var kali = counter * 2;
+            // var str = '';
+            // var formattedResult = new Intl.NumberFormat('en-US', {
+            //     style: 'decimal',
+            //     minimumFractionDigits: 2
+            // }).format(kali);
 
-            hasil.val(formattedResult);
-             total.val(formattedResult);
+
+            // hasil.val(formattedResult);
+            //  total.val(formattedResult);
+            if (isNaN(counter)) {
+        hasil.val('harus angka'); // Jika nilai yang dimasukkan adalah string, tampilkan 'chukas' di #hasil
+        total.val('harus angka'); // Kosongkan #total jika nilai yang dimasukkan adalah string
+    } else {
+        var kali = counter * 2;
+        var formattedResult = new Intl.NumberFormat('en-US', {
+            style: 'decimal',
+            minimumFractionDigits: 2
+        }).format(kali);
+
+        hasil.val(formattedResult); // Jika nilai yang dimasukkan adalah angka, tampilkan hasil perhitungan di #hasil
+        total.val(formattedResult); // Tampilkan hasil perhitungan di #total jika nilai yang dimasukkan adalah angka
+    }
         });
 
 
