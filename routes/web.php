@@ -5,6 +5,7 @@ use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\GroupsController;
 use App\Http\Controllers\ImdbController;
+use App\Http\Controllers\loadpageController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\StudioController;
 use App\Http\Controllers\MovieController;
@@ -14,6 +15,7 @@ use App\Http\Controllers\QrcodeController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\SlugController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\TanggalController;
 use App\Http\Controllers\TerbilangController;
 use App\Http\Controllers\TmdbController;
 use Illuminate\Support\Facades\Route;
@@ -118,3 +120,5 @@ Route::get('/quiz/create', [QuizController::class, 'create'])->name('quiz.create
 
 // Menyimpan pertanyaan baru
 Route::post('/quiz/store', [QuizController::class, 'store'])->name('quiz.store');
+
+Route::get('tanggal_auto', [TanggalController::class, 'index']);
