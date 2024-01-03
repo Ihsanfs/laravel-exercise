@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\AjaxController;
-
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\GroupsController;
 use App\Http\Controllers\ImdbController;
@@ -18,6 +18,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TanggalController;
 use App\Http\Controllers\TerbilangController;
 use App\Http\Controllers\TmdbController;
+use App\Models\Cart;
 use Illuminate\Support\Facades\Route;
 use PHPUnit\TextUI\XmlConfiguration\Group;
 
@@ -120,5 +121,17 @@ Route::get('/quiz/create', [QuizController::class, 'create'])->name('quiz.create
 
 // Menyimpan pertanyaan baru
 Route::post('/quiz/store', [QuizController::class, 'store'])->name('quiz.store');
+Route::get('loadpage', [loadpageController::class, 'index'])->name('loadpage');
+Route::get('loadpage/data', [loadpageController::class, 'loaddata']);
 
 Route::get('tanggal_auto', [TanggalController::class, 'index']);
+
+
+//cart
+Route::get('/home', [CartController::class, 'index']);
+Route::get('/shopping-cart', [CartController::class, 'bookCart'])->name('shopping.cart');
+Route::get('/book/{id}', [CartController::class, 'addBooktoCart'])->name('addbook.to.cart');
+Route::patch('/update-shopping-cart', [CartController::class, 'updateCart'])->name('update.sopping.cart');
+Route::delete('/delete-cart-product', [CartController::class, 'deleteProduct'])->name('delete.cart.product');
+Route::post('/book/checkout', [CartController::class, 'storeproduct'])->name('store.cart.product');
+
