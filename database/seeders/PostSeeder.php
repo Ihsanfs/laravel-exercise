@@ -6,6 +6,8 @@ namespace Database\Seeders;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
 use App\Models\Post;
+use Illuminate\Support\Facades\DB;
+
 class PostSeeder extends Seeder
 {
     /**

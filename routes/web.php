@@ -5,6 +5,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\GroupsController;
 use App\Http\Controllers\ImdbController;
+use App\Http\Controllers\LoadmoreController;
 use App\Http\Controllers\loadpageController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\StudioController;
@@ -18,6 +19,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TanggalController;
 use App\Http\Controllers\TerbilangController;
 use App\Http\Controllers\TmdbController;
+use App\Http\Controllers\WeatherController;
 use App\Models\Cart;
 use Illuminate\Support\Facades\Route;
 use PHPUnit\TextUI\XmlConfiguration\Group;
@@ -134,4 +136,14 @@ Route::get('/book/{id}', [CartController::class, 'addBooktoCart'])->name('addboo
 Route::patch('/update-shopping-cart', [CartController::class, 'updateCart'])->name('update.sopping.cart');
 Route::delete('/delete-cart-product', [CartController::class, 'deleteProduct'])->name('delete.cart.product');
 Route::post('/book/checkout', [CartController::class, 'storeproduct'])->name('store.cart.product');
+
+//cuaca
+Route::get('/cuaca', [WeatherController::class, 'index']);
+Route::get('/cuacadata', [WeatherController::class, 'cuacaget']);
+
+//loadmore
+Route::get('/loadmore/data', [LoadmoreController::class, 'index'])->name('loadmore');
+Route::get('/loadmore/data/ajax', [LoadmoreController::class, 'loadMoreData'])->name('loadmoredata');
+
+
 

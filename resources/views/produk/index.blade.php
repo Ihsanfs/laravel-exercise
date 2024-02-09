@@ -8,30 +8,27 @@
 </head>
 <body>
 
-<div class="container mt-5" style="max-width: 750px">
+    <div class="container mt-5">
+        <h1>Laravel 10 Click Load More Data</h1>
 
-    <h1>Load More Data on Button Click using JQuery Laravel</h1>
+        <div id="data-wrapper">
+            <div class="row">
+            @include('produk.data')
+            </div>
+        </div>
 
-    <div id="data-wrapper">
-        @include('produk.data')
+        <div class="row text-center" style="padding:20px;">
+            <button class="btn btn-success load-more-data">Load More Data...</button>
+        </div>
+
+        <div class="auto-load text-center" style="display: none;">
+            <div class="d-flex justify-content-center">
+                <div class="spinner-border" role="status">
+                    <span>Loading...</span>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class="text-center">
-        <button class="btn btn-success load-more-data"><i class="fa fa-refresh"></i> Load More Data...</button>
-    </div>
-
-    <!-- Data Loader -->
-    <div class="auto-load text-center" style="display: none;">
-        <svg version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-            x="0px" y="0px" height="60" viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
-            <path fill="#000"
-                d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
-                <animateTransform attributeName="transform" attributeType="XML" type="rotate" dur="1s"
-                    from="0 50 50" to="360 50 50" repeatCount="indefinite" />
-            </path>
-        </svg>
-    </div>
-</div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
@@ -58,12 +55,13 @@
                 }
             })
             .done(function (response) {
+                console.log(response);
                 if (response.html == '') {
-                    $('.auto-load').html("We don't have more data to display :(");
+                    $('.auto-load').text("End :(");
                     return;
                 }
-                $('.auto-load').hide();
-                $("#data-wrapper").append(response.html);
+                // $('.auto-load').hide();
+                $("#data-wrapper").append("<div class='row'>" + response.html + "</div>");
             })
             .fail(function (jqXHR, ajaxOptions, thrownError) {
                 console.log('Server error occured');

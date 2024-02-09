@@ -26,18 +26,7 @@ class PerulanganController extends Controller
 
     //     $artikel->save();
     // }
-    $judulInput = $request->judul;
-    $bodyInput = $request->body;
-
-    foreach ($judulInput as $key => $judul) {
-        $artikel = new Artikel(); // Membuat objek baru dari model Artikel
-        $artikel->judul = $judul; // Mengatur judul artikel
-        $artikel->body = $bodyInput[$key]; // Mengatur body artikel yang sesuai dengan judul
-        $artikel->categoris_id = 1; // Mengatur body artikel yang sesuai dengan judul
-
-        // Simpan artikel baru ke dalam database
-        $artikel->save();
-    }
+  
 
     // //hanya looping berdasarkan id saya yang terupdate
     // foreach ($judulInput as $key => $judul) {
